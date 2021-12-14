@@ -60,6 +60,7 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
+            
         }
     }
 }
