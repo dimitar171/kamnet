@@ -1,3 +1,66 @@
 <div class="container mt-5">
-    <h1>Only authorised users should be able to see this</h1>
+    <div class="row">
+        <div class="col-8">
+            <app-stepper [linearModeSelected]="false" #appStepper>
+                <mat-step [label]="'Address'" [completed]="(checkoutForm.get('addressForm'))!.valid">
+                    <app-checkout-address [checkoutForm]="checkoutForm"></app-checkout-address>
+
+                    <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+                        <button class="btn btn-outline-primary" routerLink="/basket">
+                            <i class="fa fa-angle-left"></i> Back to basket
+                        </button>
+                        <button class="btn btn-primary" (click)="goForward(appStepper)" type="button">
+                            Go to delivery <i class="fa fa-angle-right"></i>
+                        </button>
+                    </div>
+                </mat-step>
+                <mat-step [label]="'Delivery'" [completed]="(checkoutForm.get('deliveryForm'))!.valid">
+                   <app-checkout-delivery [checkoutForm]="checkoutForm"></app-checkout-delivery>
+                   
+                   <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+                  <button class="btn btn-primary" (click)="goBack(appStepper)" type="button">
+                        Go to addres <i class="fa fa-angle-left"></i>
+                    </button>
+                    <button class="btn btn-primary" (click)="goForward(appStepper)" type="button">
+                        Go to delivery <i class="fa fa-angle-right"></i>
+                    </button>
+                </div>
+
+                </mat-step>
+                <mat-step [label]="'Review'">
+                    <app-checkout-review></app-checkout-review>
+
+                    <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+                        <button class="btn btn-primary" (click)="goBack(appStepper)" type="button">
+                            Go to delivery <i class="fa fa-angle-left"></i>
+                          </button>
+                          <button class="btn btn-primary" (click)="goForward(appStepper)" type="button">
+                              Go to payment <i class="fa fa-angle-right"></i>
+                          </button>
+                        </div>
+                </mat-step>
+                <mat-step [label]="'Payment'">
+                    <app-checkout-payment [checkoutForm]="checkoutForm">
+
+                        
+                    </app-checkout-payment>
+
+                    <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+                        <button class="btn btn-outline-primary"(click)="goBack(appStepper)" type="button">
+                            <i class="fa fa-angle-left"></i> Back to Review
+                        </button>
+                            <button class="btn btn-primary" (click)="submitOrder()">
+                                Submit order <i class="fa fa-angle-right"></i>
+                            </button>
+                           
+                    </div>
+
+                </mat-step>
+            </app-stepper>
+        </div>
+        
+        <div class="col-4">
+            <app-order-totals></app-order-totals>
+        </div>
+    </div>
 </div>

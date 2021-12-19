@@ -8,19 +8,36 @@ import { PagerComponent } from './components/pager/pager.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import {MatStepperModule} from '@angular/material/stepper';
+
+import { StepperComponent } from './components/stepper/stepper.component';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent
+    PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent, BasketSummaryComponent
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    RouterModule
   ],
-  exports:[PaginationModule,PagingHeaderComponent,PagerComponent, CarouselModule, OrderTotalsComponent,ReactiveFormsModule, BsDropdownModule,TextInputComponent]
+  exports:[PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent, 
+    CarouselModule, 
+    OrderTotalsComponent,
+    ReactiveFormsModule, 
+    BsDropdownModule,
+    TextInputComponent,
+    MatStepperModule,
+  StepperComponent,
+BasketSummaryComponent]
 
 })
 export class SharedModule { }
