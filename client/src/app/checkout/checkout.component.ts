@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../account/account.service';
 import { MatStepper } from '@angular/material/stepper';
 import {  Input} from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BasketService } from 'src/app/basket/basket.service';
-import { IBasket } from 'src/app/shared/models/basket';
+import { IBasket, IBasketTotals } from 'src/app/shared/models/basket';
 import { CheckoutService } from './checkout.service';
 
 
@@ -19,6 +20,7 @@ import { CheckoutService } from './checkout.service';
 })
 export class CheckoutComponent implements OnInit {
   @Input() checkoutForm!: FormGroup;
+  basketTotals$!: Observable<IBasketTotals|null>;
 
   constructor(private fb: FormBuilder, private accountService: AccountService,private basketService: BasketService, private checkoutService: CheckoutService, 
     private toastr: ToastrService, private router: Router) { }
@@ -26,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.createCheckoutForm();
     this.getAddressFormValues();
+    this.basketTotals$ = this.basketService.basketTotal$;
   }
   goBack(stepper: MatStepper){
     stepper.previous();
@@ -54,6 +57,7 @@ goForward(stepper: MatStepper){
       })
     })
   }
+
   submitOrder() {
     const basket = this.basketService.getCurrentBasketValue();
     const orderToCreate = this.getOrderToCreate(basket);
