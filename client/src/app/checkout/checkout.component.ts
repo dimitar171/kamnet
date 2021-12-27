@@ -66,7 +66,7 @@ export class CheckoutComponent implements OnInit,OnDestroy,AfterViewInit{
     this.cardCvc = elements.create('cardCvc');
     this.cardCvc.mount(this.cardCvcElement.nativeElement);
     this.cardCvc.addEventListener('change', this.cardHandler);
-  }
+  } 
   ngOnDestroy(): void {
     this.cardNumber.destroy();
     this.cardExpiry.destroy();
